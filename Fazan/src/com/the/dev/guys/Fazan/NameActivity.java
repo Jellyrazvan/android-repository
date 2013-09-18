@@ -1,5 +1,7 @@
-package com.the.dev.guys.fazan;
+package com.the.dev.guys.Fazan;
 
+
+import com.the.dev.guys.fazan.R;
 
 import android.annotation.TargetApi;
 import android.app.ActionBar;

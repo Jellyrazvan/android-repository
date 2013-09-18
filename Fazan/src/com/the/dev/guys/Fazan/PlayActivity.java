@@ -1,4 +1,4 @@
-package com.the.dev.guys.fazan;
+package com.the.dev.guys.Fazan;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -27,6 +27,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.the.dev.guys.Repository.Repository;
+import com.the.dev.guys.fazan.R;
 
 public class PlayActivity extends Activity {
 	

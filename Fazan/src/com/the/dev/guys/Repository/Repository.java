@@ -74,14 +74,18 @@ public class Repository {
 	
 	public String findBy(String value){
 		String result = "0";
-		for (Word el: mWordsVector){
-			if (el.get_text().length() >= 2){
-				String text = el.get_text().substring(0, 2);
-				if ((text.equals(value)) && (el.get_verify() == false)){
-					el.set_verify(true);
-					return el.get_text().toUpperCase(Locale.getDefault());
-				}
+		Vector<Word> matchingWords = new Vector<Word>();
+		for (Word word: mWordsVector){
+			String text = word.get_text().substring(0, 2);
+			if ((text.equals(value)) && (word.get_verify() == false)){
+				matchingWords.add(word);
 			}
+		}
+		if (!matchingWords.isEmpty()){
+			Random generator = new Random();
+			int index = generator.nextInt(matchingWords.size());
+			matchingWords.get(index).set_verify(true);
+			return matchingWords.get(index).get_text().toUpperCase(Locale.getDefault());
 		}
 		return result;
 	}

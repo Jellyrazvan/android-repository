@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.the.dev.guys.fazan.MainActivity"
+            android:name="com.the.dev.guys.Fazan.MainActivity"
             android:label="@string/app_name"
             android:screenOrientation="portrait" >
             <intent-filter>
@@ -24,28 +24,28 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.the.dev.guys.fazan.PlayActivity"
+            android:name="com.the.dev.guys.Fazan.PlayActivity"
             android:label="@string/title_activity_play"
             android:screenOrientation="portrait"
-            android:parentActivityName="com.the.dev.guys.fazan.MainActivity" >
+            android:parentActivityName="com.the.dev.guys.Fazan.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.the.dev.guys.fazan.MainActivity" />
         </activity>
         <activity
-            android:name="com.the.dev.guys.fazan.NameActivity"
+            android:name="com.the.dev.guys.Fazan.NameActivity"
             android:label="@string/title_activity_name"
             android:screenOrientation="portrait"
-            android:parentActivityName="com.the.dev.guys.fazan.PlayActivity" >
+            android:parentActivityName="com.the.dev.guys.Fazan.PlayActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.the.dev.guys.fazan.PlayActivity" />
         </activity>
         <activity
-            android:name="com.the.dev.guys.fazan.HighscoreActivity"
+            android:name="com.the.dev.guys.Fazan.HighscoreActivity"
             android:label="@string/title_activity_highscore"
             android:screenOrientation="portrait"
-            android:parentActivityName="com.the.dev.guys.fazan.MainActivity" >
+            android:parentActivityName="com.the.dev.guys.Fazan.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.the.dev.guys.fazan.MainActivity" />
