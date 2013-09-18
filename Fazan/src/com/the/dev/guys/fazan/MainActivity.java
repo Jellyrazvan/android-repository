@@ -37,9 +37,12 @@ public class MainActivity extends SherlockActivity {
 		mHighscoresButton = (Button) findViewById(R.id.highscores_button);  
 		mHighscoresButton.setTypeface(font);
 		
-		mQuitButton = (Button) findViewById(R.id.quit_button);   
-		mQuitButton.setTypeface(font);
-		
+		if (getResources().getConfiguration().orientation == 
+				getResources().getConfiguration().ORIENTATION_PORTRAIT) {
+			mQuitButton = (Button) findViewById(R.id.quit_button);   
+			mQuitButton.setTypeface(font);
+		}
+			
 		mWelcomeTextView = (TextView) findViewById(R.id.welcome_textView);
 		mWelcomeTextView.setTypeface(font);
 		

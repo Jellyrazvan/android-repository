@@ -5,6 +5,7 @@ import java.util.Locale;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -186,5 +187,10 @@ public boolean game(View view){
 		}
 				
 		return true;
+	}
+
+	public void onConfigurationChanged(Configuration newConfig) {
+		super.onConfigurationChanged(newConfig);
+		//this.recreate();
 	}
 }
