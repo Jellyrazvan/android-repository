@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.util.Locale;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -18,18 +16,17 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.the.dev.guys.Repository.Repository;
-import com.the.dev.guys.fazan.R;
 
-public class PlayActivity extends Activity {
+public class PlayActivity extends SherlockActivity {
 	
 	private int mScore;
 	private int mWrongAnswers;
@@ -50,17 +47,18 @@ public class PlayActivity extends Activity {
 		mScore = 0;
 		mWrongAnswers = 0;
 		
-		ActionBar bar = getActionBar();
+		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.green)));
 		// Show the Up button in the action bar.
 		setupActionBar();
 		
 		mRepository= Repository.getRepository(getApplicationContext());
-		try {
-			this.mRepository.loadWordsFromFile();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		if (mRepository.getVector().isEmpty())
+			try {
+				this.mRepository.loadWordsFromFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		
 		Typeface robotoMediumFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf"); 
 		Typeface robotoThinFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
@@ -119,16 +117,16 @@ public class PlayActivity extends Activity {
 /////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.play, menu);
+		getSupportMenuInflater().inflate(R.menu.play, menu);
 		return true;
 	}
 
 /////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This ID represents the Home or Up button. In the case of this

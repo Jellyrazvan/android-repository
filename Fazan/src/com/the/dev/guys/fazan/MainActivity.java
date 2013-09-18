@@ -1,22 +1,20 @@
 package com.the.dev.guys.fazan;
 
 
-import com.the.dev.guys.fazan.R;
-
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
 
-public class MainActivity extends Activity {
+
+public class MainActivity extends SherlockActivity {
 	private static final String FIRST_RUN = "firstrun";
 	
 	private TextView mWelcomeTextView;
@@ -29,7 +27,7 @@ public class MainActivity extends Activity {
 		
 		setContentView(R.layout.activity_main);
 		
-		ActionBar bar = getActionBar();
+		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
 
 		mPlayButton = (Button) findViewById(R.id.play_button);  
@@ -64,9 +62,9 @@ public class MainActivity extends Activity {
 /////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
+		getSupportMenuInflater().inflate(R.menu.main, menu);
 		return true;
 	}
 	

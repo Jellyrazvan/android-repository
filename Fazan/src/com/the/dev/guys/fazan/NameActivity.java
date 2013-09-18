@@ -1,11 +1,7 @@
 package com.the.dev.guys.fazan;
 
 
-import com.the.dev.guys.fazan.R;
-
 import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -13,16 +9,17 @@ import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
 
-public class NameActivity extends Activity {
+
+public class NameActivity extends SherlockActivity {
 	
 	public final static String EXTRA_MESSAGE = "com.the.dev.guys.Fazan.Message";
 	
@@ -40,7 +37,7 @@ public class NameActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_name);
 		
-		ActionBar bar = getActionBar();
+		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.yellow)));
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -89,9 +86,9 @@ public class NameActivity extends Activity {
 /////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.name, menu);
+		getSupportMenuInflater().inflate(R.menu.name, menu);
 		return true;
 		
 	}
@@ -99,7 +96,7 @@ public class NameActivity extends Activity {
 /////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This ID represents the Home or Up button. In the case of this

@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import android.annotation.TargetApi;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -14,17 +12,16 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.KeyEvent;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.actionbarsherlock.app.ActionBar;
+import com.actionbarsherlock.app.SherlockActivity;
 import com.the.dev.guys.Domain.Player;
 import com.the.dev.guys.Repository.Repository;
-import com.the.dev.guys.fazan.R;
 
-public class HighscoreActivity extends Activity {
+public class HighscoreActivity extends SherlockActivity {
 	
 	private Repository mRepository;
 	private ListView mHighScoresListView;
@@ -41,7 +38,7 @@ public class HighscoreActivity extends Activity {
 		mRepository = Repository.getRepository(getApplicationContext());
 		mHighScoresListView = (ListView) findViewById(R.id.highscores_listView);
 		
-		ActionBar bar = getActionBar();
+		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.yellow)));
 		// Show the Up button in the action bar.
 		setupActionBar();
@@ -99,16 +96,16 @@ public class HighscoreActivity extends Activity {
 /////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(com.actionbarsherlock.view.Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.highscore, menu);
+		getSupportMenuInflater().inflate(R.menu.highscore, menu);
 		return true;
 	}
 
 /////////////////////////////////////////////////////////////////////////
 	
 	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
 		switch (item.getItemId()) {
 		case android.R.id.home:
 			// This ID represents the Home or Up button. In the case of this
