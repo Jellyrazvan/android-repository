@@ -85,7 +85,7 @@ public class PlayActivity extends Activity {
 		mWrongTextView.setText("Wrong: 0");
 		
 		mWordEditText = (EditText) findViewById(R.id.word_editText);
-		mWordEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+		mWordEditText.setInputType(InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
 		mWordEditText.setTypeface(robotoMediumFont);
 		mWordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			@Override
