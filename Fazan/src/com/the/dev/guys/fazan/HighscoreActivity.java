@@ -1,4 +1,4 @@
-package com.the.dev.guys.Fazan;
+package com.the.dev.guys.fazan;
 
 import java.io.IOException;
 import java.util.ArrayList;

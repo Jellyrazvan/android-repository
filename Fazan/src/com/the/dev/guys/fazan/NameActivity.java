@@ -1,4 +1,4 @@
-package com.the.dev.guys.Fazan;
+package com.the.dev.guys.fazan;
 
 
 import com.the.dev.guys.fazan.R;
@@ -11,6 +11,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -59,6 +60,7 @@ public class NameActivity extends Activity {
 		mNameButton.setTypeface(cartonSlabFont);
 		
 		mNameEditText = (EditText) findViewById(R.id.name_editText);
+		mNameEditText.setInputType(InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 		mNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 				@Override
 				public boolean onEditorAction(TextView arg0, int actionId, KeyEvent key) {
