@@ -20,6 +20,7 @@ import com.actionbarsherlock.app.SherlockActivity;
 
 
 public class NameActivity extends SherlockActivity {
+	private final static String KEY_NAME = "name";
 	
 	public final static String EXTRA_MESSAGE = "com.the.dev.guys.Fazan.Message";
 	
@@ -57,6 +58,9 @@ public class NameActivity extends SherlockActivity {
 		mNameButton.setTypeface(cartonSlabFont);
 		
 		mNameEditText = (EditText) findViewById(R.id.name_editText);
+		if (savedInstanceState != null){
+			mNameEditText.setText(savedInstanceState.getString(KEY_NAME));
+		}
 		mNameEditText.setInputType(InputType.TYPE_CLASS_TEXT + InputType.TYPE_TEXT_FLAG_CAP_SENTENCES);
 		mNameEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 				@Override
@@ -68,6 +72,13 @@ public class NameActivity extends SherlockActivity {
 					return true;
 				}
 			});
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState){
+		super.onSaveInstanceState(savedInstanceState);
+		String name = mNameEditText.getText().toString();
+		savedInstanceState.putString(KEY_NAME, name);
 	}
 
 /////////////////////////////////////////////////////////////////////////

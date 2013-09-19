@@ -4,8 +4,8 @@ import java.io.IOException;
 import java.util.Locale;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -19,6 +19,7 @@ import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -28,6 +29,10 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.the.dev.guys.Repository.Repository;
 
 public class PlayActivity extends SherlockActivity {
+	private static final String KEY_GIVEN_WORD = "givenword";
+	private static final String KEY_WRITTEN_WORD = "writtenword";
+	private static final String KEY_SCORE = "score";
+	private static final String KEY_WRONG_ANSWERS = "wronganswers";
 	
 	private int mScore;
 	private int mWrongAnswers;
@@ -44,9 +49,13 @@ public class PlayActivity extends SherlockActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_play);
-		
-		mScore = 0;
-		mWrongAnswers = 0;
+		if (savedInstanceState == null){
+			mScore = 0;
+			mWrongAnswers = 0;
+		} else {
+			mScore = savedInstanceState.getInt(KEY_SCORE);
+			mWrongAnswers = savedInstanceState.getInt(KEY_WRONG_ANSWERS);
+		}
 		
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.green)));
@@ -66,7 +75,12 @@ public class PlayActivity extends SherlockActivity {
 		Typeface cartonSlabFont = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf");
 		
 		mGivenWordTextView = (TextView) findViewById(R.id.given_word_textView);
-		String randomWord = mRepository.getRandom();
+		String randomWord;
+		if (savedInstanceState == null) {
+			randomWord = mRepository.getRandom();
+		} else {
+			randomWord = savedInstanceState.getString(KEY_GIVEN_WORD);
+		}
 		Spannable WordtoSpan = new SpannableString(randomWord);
 		WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), randomWord.length() - 2,
 				randomWord.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -81,12 +95,15 @@ public class PlayActivity extends SherlockActivity {
 		
 		mWrongTextView = (TextView) findViewById(R.id.wrong_textView);
 		mWrongTextView.setTypeface(robotoThinFont);
-		mWrongTextView.setText("Wrong: 0");
+		mWrongTextView.setText("Wrong: " + mWrongAnswers);
 		
 		mWordEditText = (EditText) findViewById(R.id.word_editText);
 		mWordEditText.setInputType(InputType.TYPE_CLASS_TEXT 
 				+ InputType.TYPE_TEXT_FLAG_CAP_CHARACTERS);
 		mWordEditText.setTypeface(robotoMediumFont);
+		if (savedInstanceState != null){
+			mWordEditText.setText(savedInstanceState.getString(KEY_WRITTEN_WORD));
+		}
 		mWordEditText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
 			@Override
 			public boolean onEditorAction(TextView arg0, int actionId, KeyEvent key) {
@@ -101,7 +118,20 @@ public class PlayActivity extends SherlockActivity {
 		mSubmitButton = (Button) findViewById(R.id.submit_button);
 		mSubmitButton.setTypeface(cartonSlabFont);
 	}
+	
+/////////////////////////////////////////////////////////////////////
 
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		super.onSaveInstanceState(savedInstanceState);
+		String givenWord = mGivenWordTextView.getText().toString();
+		String writtenWord = mWordEditText.getText().toString();
+		savedInstanceState.putString(KEY_GIVEN_WORD, givenWord);
+		savedInstanceState.putString(KEY_WRITTEN_WORD, writtenWord);
+		savedInstanceState.putInt(KEY_SCORE, mScore);
+		savedInstanceState.putInt(KEY_WRONG_ANSWERS, mWrongAnswers);
+	}
+	
 /////////////////////////////////////////////////////////////////////////
 	
 	/**
@@ -189,8 +219,4 @@ public boolean game(View view){
 		return true;
 	}
 
-	public void onConfigurationChanged(Configuration newConfig) {
-		super.onConfigurationChanged(newConfig);
-		//this.recreate();
-	}
 }

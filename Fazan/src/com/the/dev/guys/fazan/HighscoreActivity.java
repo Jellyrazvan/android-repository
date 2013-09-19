@@ -74,7 +74,7 @@ public class HighscoreActivity extends SherlockActivity {
 		
 		ArrayAdapter<String> arrayAdapter =
 					new ArrayAdapter<String>(this, R.layout.list_layout, entrysList);
-		mHighScoresListView.setAdapter(arrayAdapter); 
+		mHighScoresListView.setAdapter(arrayAdapter);
 		
 		mHighScoresTextView = (TextView) findViewById(R.id.highscores_textView);
 		Typeface cartonSlabFont = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf"); 
