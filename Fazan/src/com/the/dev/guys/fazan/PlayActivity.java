@@ -60,7 +60,8 @@ public class PlayActivity extends SherlockActivity {
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.green)));
 		// Show the Up button in the action bar.
-		setupActionBar();
+		//setupActionBar();
+		bar.setDisplayHomeAsUpEnabled(true);
 		
 		mRepository= Repository.getRepository(getApplicationContext());
 		if (mRepository.getVector().isEmpty())

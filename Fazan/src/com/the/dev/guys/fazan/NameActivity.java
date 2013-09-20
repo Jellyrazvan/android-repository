@@ -41,7 +41,8 @@ public class NameActivity extends SherlockActivity {
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.yellow)));
 		// Show the Up button in the action bar.
-		setupActionBar();
+		//setupActionBar();
+		bar.setDisplayHomeAsUpEnabled(true);
 		
 		Typeface cartonSlabFont = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf");
 		

@@ -29,6 +29,7 @@ public class MainActivity extends SherlockActivity {
 		
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
+		bar.setDisplayHomeAsUpEnabled(true);
 
 		mPlayButton = (Button) findViewById(R.id.play_button);  
 		Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf");

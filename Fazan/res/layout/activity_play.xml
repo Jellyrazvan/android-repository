@@ -36,7 +36,8 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="@color/black"
-        android:ems="10" />
+        android:ems="10"
+        android:singleLine="true" />
 
     <Button
         android:id="@+id/submit_button"

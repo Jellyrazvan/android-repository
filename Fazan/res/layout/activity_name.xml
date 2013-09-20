@@ -39,6 +39,7 @@
         android:paddingRight="10dp"
         android:background="@color/black"
         android:inputType="textPersonName" 
+        android:singleLine="true"
         >
 
         <requestFocus />
