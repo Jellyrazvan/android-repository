@@ -249,11 +249,11 @@ int drawable abs__textfield_searchview_right_holo_light 0x7f02006e
 int drawable abs__toast_frame 0x7f02006f
 int drawable background_template 0x7f020070
 int drawable background_template_play 0x7f020071
-int drawable bird 0x7f020072
-int drawable circle 0x7f020073
-int drawable circle_shape 0x7f020074
-int drawable exit 0x7f020075
-int drawable game 0x7f020076
+int drawable circle 0x7f020072
+int drawable circle_shape 0x7f020073
+int drawable exit 0x7f020074
+int drawable game 0x7f020075
+int drawable ic_bird 0x7f020076
 int drawable list 0x7f020077
 int drawable ok 0x7f020078
 int drawable rounded_corners 0x7f020079
