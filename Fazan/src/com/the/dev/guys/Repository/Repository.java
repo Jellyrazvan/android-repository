@@ -23,8 +23,8 @@ public class Repository {
 	
 	private static Repository sRepository;
 	
-	private Vector<Word> mWordsVector= new Vector<Word>(73000,1000);
-	private Vector<Player> mHighScoresVector= new Vector<Player>(6,1);
+	private Vector<Word> mWordsVector;
+	private Vector<Player> mHighScoresVector;
 	private Context mAppContext;
 	
 	
@@ -38,6 +38,8 @@ public class Repository {
 
 	private Repository(Context context){
 		mAppContext = context;
+		mWordsVector = new Vector<Word>(73000,1000);
+		mHighScoresVector = new Vector<Player>(6,1);
 	}
 	
 //////////////////////////////////////////////////////////////
@@ -217,5 +219,14 @@ public class Repository {
 			br.close();
 		}
 	}
-		
+
+/////////////////////////////////////////////////////////////////////
+
+	public void deverify() {
+		for (Word word: mWordsVector){
+			if (word.get_verify()){
+				word.set_verify(false);
+			}
+		}
+	}
 }

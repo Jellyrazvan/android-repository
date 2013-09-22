@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Locale;
 
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -19,7 +18,6 @@ import android.text.style.ForegroundColorSpan;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -63,14 +61,16 @@ public class PlayActivity extends SherlockActivity {
 		//setupActionBar();
 		bar.setDisplayHomeAsUpEnabled(true);
 		
-		mRepository= Repository.getRepository(getApplicationContext());
-		if (mRepository.getVector().isEmpty())
+		mRepository = Repository.getRepository(getApplicationContext());
+		if (mRepository.getVector().isEmpty()) {
 			try {
 				this.mRepository.loadWordsFromFile();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-		
+		} else {
+			mRepository.deverify();
+		}
 		Typeface robotoMediumFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf"); 
 		Typeface robotoThinFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Thin.ttf");
 		Typeface cartonSlabFont = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf");
@@ -177,7 +177,6 @@ public class PlayActivity extends SherlockActivity {
 /////////////////////////////////////////////////////////////////////////
 	
 public boolean game(View view){
-		mWordEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 		String text = mWordEditText.getText().toString().toLowerCase(Locale.getDefault());
 		
 		if (this.mRepository.find(text)){
