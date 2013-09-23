@@ -62,6 +62,7 @@ public class Repository {
 
 	public void loadWordsFromFile(String filename) throws IOException {
 		
+		mWordsVector.clear();
 		BufferedReader br = new BufferedReader(
 				new InputStreamReader(mAppContext.getAssets().open(filename)));
 		try {

@@ -15,6 +15,7 @@ import android.text.InputType;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -64,8 +65,9 @@ public class PlayActivity extends SherlockActivity {
 		mRepository = Repository.getRepository(getApplicationContext());
 		if (mRepository.getVector().isEmpty()) {
 			try {
-				this.mRepository.loadWordsFromFile();
+				mRepository.loadWordsFromFile(Repository.DIACRITICE_FILENAME);
 			} catch (IOException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		} else {
@@ -95,8 +97,8 @@ public class PlayActivity extends SherlockActivity {
 		mScoreTextView.setTypeface(robotoThinFont);
 		
 		mWrongTextView = (TextView) findViewById(R.id.wrong_textView);
-		mWrongTextView.setTypeface(robotoThinFont);
-		mWrongTextView.setText("Wrong: " + mWrongAnswers);
+		mWrongTextView.setTypeface(robotoMediumFont);
+		//mWrongTextView.setText("Wrong: " + mWrongAnswers);
 		
 		mWordEditText = (EditText) findViewById(R.id.word_editText);
 		mWordEditText.setInputType(InputType.TYPE_CLASS_TEXT 
@@ -178,7 +180,7 @@ public class PlayActivity extends SherlockActivity {
 	
 public boolean game(View view){
 		String text = mWordEditText.getText().toString().toLowerCase(Locale.getDefault());
-		
+		Log.d("plm", Boolean.toString(mRepository.get_sunet()));
 		if (this.mRepository.find(text)){
 			String word = mRepository.findBy(text.substring(text.length()-2, text.length()));
 			if (word.equals("0")){
@@ -206,9 +208,46 @@ public boolean game(View view){
 		String scor = new String();
 		scor = "Score: " + mScore;
 		mScoreTextView.setText(scor);
+		switch (mWrongAnswers) {
+		case 1:
+			Spannable WordtoSpan = new SpannableString("F");
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mWrongTextView.setText(WordtoSpan);
+			break;
+		case 2:
+			WordtoSpan = new SpannableString("FA");
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mWrongTextView.setText(WordtoSpan);
+			break;
+		case 3:
+			WordtoSpan = new SpannableString("FAZ");
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.GREEN), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mWrongTextView.setText(WordtoSpan);
+			break;
+		case 4:
+			WordtoSpan = new SpannableString("FAZA");
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.GREEN), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.CYAN), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mWrongTextView.setText(WordtoSpan);
+			break;
+		case 5:
+			WordtoSpan = new SpannableString("FAZAN");
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.GREEN), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.CYAN), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.MAGENTA), 4, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			mWrongTextView.setText(WordtoSpan);
+			break;
+		}
 		String b = new String();
 		b = Integer.toString(mWrongAnswers);
-		mWrongTextView.setText("Wrong: " + b);
+		//mWrongTextView.setText("Wrong: " + b);
 		if (mWrongAnswers > 5){
 			Intent intent = new Intent(this, NameActivity.class);
 			String message = Integer.toString(this.mScore);

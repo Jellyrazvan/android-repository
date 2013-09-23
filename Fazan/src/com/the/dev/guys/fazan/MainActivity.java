@@ -5,27 +5,35 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.the.dev.guys.Repository.Repository;
 
 
 public class MainActivity extends SherlockActivity {
 	private static final String FIRST_RUN = "firstrun";
+	public static final String SAVED_SETTINGS = "savedsettings"; 
 	
 	private TextView mWelcomeTextView;
 	private Button mPlayButton, mHighscoresButton,
 			mQuitButton, mSettingsButton;
+	
+	private Repository mRepository;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setContentView(R.layout.activity_main);
+		
+		mRepository = Repository.getRepository(getApplicationContext());
 		
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
@@ -64,6 +72,15 @@ public class MainActivity extends SherlockActivity {
 				.edit()
 				.putBoolean("firstRunValue", false)
 				.commit();
+		
+		boolean soundSetting = getSharedPreferences(SAVED_SETTINGS, MODE_PRIVATE)
+				.getBoolean("sound_setting", true);
+		boolean diacriticeSetting = getSharedPreferences(SAVED_SETTINGS, MODE_PRIVATE)
+				.getBoolean("diacritice_setting", false);
+		
+		mRepository.set_diacritice(diacriticeSetting);
+		mRepository.set_sunet(soundSetting);
+		Log.d("plm", "is aci");
 	}
 
 /////////////////////////////////////////////////////////////////////////
@@ -78,6 +95,10 @@ public class MainActivity extends SherlockActivity {
 /////////////////////////////////////////////////////////////////////////
 	
 	public void openPlayActivity(View view){
+		if (this.mRepository.get_sunet()){
+			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+			mp.start();
+		}
 		Intent intent=new Intent(this, PlayActivity.class);
 		startActivity(intent);
 	}
@@ -85,6 +106,15 @@ public class MainActivity extends SherlockActivity {
 /////////////////////////////////////////////////////////////////////////
 	
 	public void CloseApp(View view){
+		if (this.mRepository.get_sunet()){
+			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+			mp.start();
+		}
+		getSharedPreferences(SAVED_SETTINGS, MODE_PRIVATE)
+				.edit()
+				.putBoolean("sound_setting", mRepository.get_sunet())
+				.putBoolean("diacritice_setting", mRepository.get_diacritice())
+				.commit();
 		finish();
 		System.exit(0);
 	}
@@ -92,6 +122,10 @@ public class MainActivity extends SherlockActivity {
 /////////////////////////////////////////////////////////////////////////
 	
 	public void openHighScores(View view){
+		if (this.mRepository.get_sunet()){
+			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+			 mp.start();
+		}
 		Intent intent = new Intent(this, HighscoreActivity.class);
 		startActivity(intent);
 	}
@@ -99,6 +133,10 @@ public class MainActivity extends SherlockActivity {
 //////////////////////////////////////////////////////////////////////////
 
 	public void openSettingsActivity(View view){
+		if (this.mRepository.get_sunet()){
+			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+			mp.start();
+		}
 		Intent intent=new Intent(this, OptionActivity.class);
 		startActivity(intent);
 	}

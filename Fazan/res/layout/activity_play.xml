@@ -73,9 +73,9 @@
         android:layout_alignBottom="@+id/score_textView"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:text="Small Text"
         android:textColor="#ffffff"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:textAppearance="?android:attr/textAppearanceSmall" />
 
 </RelativeLayout>
