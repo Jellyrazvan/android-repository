@@ -22,24 +22,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <Button
-        android:id="@+id/quit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/highscores_button"
-        android:layout_alignRight="@+id/highscores_button"
-        android:layout_below="@+id/highscores_button"
-        android:background="@drawable/rounded_corners"
-        android:drawableLeft="@drawable/exit"
-       	android:paddingLeft="8dp"
-       	android:paddingRight="8dp"
-        android:textColor="#ffffff"
-        android:textAllCaps="true"
-        android:layout_marginTop="58dp"
-        android:text="@string/quit"
-        android:onClick="CloseApp" 
-        />
-
-    <Button
         android:id="@+id/play_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -62,17 +44,50 @@
         android:id="@+id/highscores_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/play_button"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
-        android:paddingLeft="8dp"
-        android:paddingRight="8dp"
+        android:layout_below="@+id/play_button"
+        android:layout_marginTop="39dp"
         android:background="@drawable/rounded_corners"
         android:drawableLeft="@drawable/list"
-        android:textAllCaps="true"
-        android:textColor="#ffffff"
+        android:onClick="openHighScores"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:text="@string/high_scores"
-        android:onClick="openHighScores" />
-    
+        android:textAllCaps="true"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/quit_button"
+        android:layout_alignRight="@+id/highscores_button"
+        android:layout_below="@+id/highscores_button"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/rounded_corners"
+        android:drawableLeft="@drawable/settings"
+        android:onClick="openSettingsActivity"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/settings"
+        android:textAllCaps="true"
+        android:textColor="#ffffff" />
+
+    <Button
+        android:id="@+id/quit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/highscores_button"
+        android:layout_alignRight="@+id/highscores_button"
+        android:layout_below="@+id/settings_button"
+        android:layout_marginTop="39dp"
+        android:background="@drawable/rounded_corners"
+        android:drawableLeft="@drawable/exit"
+        android:onClick="CloseApp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:text="@string/quit"
+        android:textAllCaps="true"
+        android:textColor="#ffffff" />
 
 </RelativeLayout>

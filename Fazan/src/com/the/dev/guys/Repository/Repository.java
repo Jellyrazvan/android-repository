@@ -21,11 +21,17 @@ import com.the.dev.guys.Domain.Word;
 public class Repository {
 	private static final String HIGHSCORES_FILENAME = "highscores.txt";
 	
+	public static final String DIACRITICE_FILENAME = "words_ro_v2_diacritice.txt";
+	public static final String FARA_DIACRITICE_FILENAME = "words_ro_v2.txt";
+	
 	private static Repository sRepository;
 	
 	private Vector<Word> mWordsVector;
 	private Vector<Player> mHighScoresVector;
 	private Context mAppContext;
+	
+	private boolean diacritice;
+    private boolean sunet;
 	
 	
 ////////////////////////////////////////////////////////////
@@ -54,10 +60,10 @@ public class Repository {
 	
 ////////////////////////////////////////////////////////////
 
-	public void loadWordsFromFile() throws IOException {
+	public void loadWordsFromFile(String filename) throws IOException {
 		
 		BufferedReader br = new BufferedReader(
-				new InputStreamReader(mAppContext.getAssets().open("words_ro_v2.txt")));
+				new InputStreamReader(mAppContext.getAssets().open(filename)));
 		try {
 			String line = br.readLine();
 			while (line != null){
@@ -229,4 +235,31 @@ public class Repository {
 			}
 		}
 	}
+	
+////////////////////////////////////////////////////////////
+
+	public boolean get_sunet(){
+		return this.sunet;
+	}
+
+////////////////////////////////////////////////////////////
+
+	public boolean get_diacritice(){
+		return this.diacritice;
+	}
+
+////////////////////////////////////////////////////////////
+
+	public void set_sunet(boolean val){
+		this.sunet=val;
+	}
+
+////////////////////////////////////////////////////////////
+
+	public void set_diacritice(boolean val){
+		this.diacritice=val;
+	}
+
+////////////////////////////////////////////////////////////
+	
 }

@@ -8,11 +8,15 @@
     <string name="play">Play</string>
     <string name="quit">Quit</string>
     <string name="high_scores">High scores</string>
+    <string name="settings">Settings</string>
     <string name="title_activity_play">Play</string>
     <string name="submit">Submit</string>
     <string name="title_activity_name">Highscore</string>
     <string name="enter_your_name">Enter your name:</string>
     <string name="title_activity_highscore">Highscore</string>
-
+    <string name="title_activity_option">OptionActivity</string>
+    
+    <string name="diacritice">Diacritice</string>
+    <string name="sunete">Sunete</string>
 
 </resources>

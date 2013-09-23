@@ -19,7 +19,7 @@ public class MainActivity extends SherlockActivity {
 	
 	private TextView mWelcomeTextView;
 	private Button mPlayButton, mHighscoresButton,
-			mQuitButton;
+			mQuitButton, mSettingsButton;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +37,9 @@ public class MainActivity extends SherlockActivity {
 		
 		mHighscoresButton = (Button) findViewById(R.id.highscores_button);  
 		mHighscoresButton.setTypeface(font);
+		
+		mSettingsButton = (Button) findViewById(R.id.settings_button);
+		mSettingsButton.setTypeface(font);
 		
 		if (getResources().getConfiguration().orientation == 
 				getResources().getConfiguration().ORIENTATION_PORTRAIT) {
@@ -90,6 +93,13 @@ public class MainActivity extends SherlockActivity {
 	
 	public void openHighScores(View view){
 		Intent intent = new Intent(this, HighscoreActivity.class);
+		startActivity(intent);
+	}
+
+//////////////////////////////////////////////////////////////////////////
+
+	public void openSettingsActivity(View view){
+		Intent intent=new Intent(this, OptionActivity.class);
 		startActivity(intent);
 	}
 }

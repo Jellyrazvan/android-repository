@@ -926,6 +926,8 @@ containing a value of this type.
         public static final int list=0x7f020077;
         public static final int ok=0x7f020078;
         public static final int rounded_corners=0x7f020079;
+        public static final int rounded_corners_toggle_button=0x7f02007a;
+        public static final int settings=0x7f02007b;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f040020;
@@ -967,32 +969,39 @@ containing a value of this type.
         public static final int abs__textButton=0x7f040013;
         public static final int abs__title=0x7f04001b;
         public static final int abs__up=0x7f04000b;
-        public static final int action_settings=0x7f040040;
+        public static final int action_settings=0x7f040047;
+        public static final int diacritice_textView=0x7f040041;
+        public static final int diacritice_toggleButton=0x7f040042;
         public static final int disableHome=0x7f040009;
         public static final int edit_query=0x7f040026;
-        public static final int given_word_textView=0x7f04003c;
+        public static final int given_word_textView=0x7f040043;
         public static final int highscores_button=0x7f040036;
         public static final int highscores_listView=0x7f040033;
         public static final int highscores_textView=0x7f040032;
         public static final int homeAsUp=0x7f040006;
+        public static final int linearLayout1=0x7f04003e;
         public static final int listMode=0x7f040002;
-        public static final int name_button=0x7f04003a;
-        public static final int name_editText=0x7f040039;
-        public static final int name_textView=0x7f040038;
+        public static final int name_button=0x7f04003b;
+        public static final int name_editText=0x7f04003a;
+        public static final int name_textView=0x7f040039;
         public static final int normal=0x7f040001;
-        public static final int play_button=0x7f040037;
-        public static final int quit_button=0x7f040035;
-        public static final int score_textView=0x7f04003b;
+        public static final int play_button=0x7f040035;
+        public static final int quit_button=0x7f040038;
+        public static final int score_textView=0x7f04003c;
+        public static final int settings_button=0x7f040037;
+        public static final int settings_textView=0x7f04003d;
         public static final int showCustom=0x7f040008;
         public static final int showHome=0x7f040005;
         public static final int showTitle=0x7f040007;
-        public static final int submit_button=0x7f04003e;
+        public static final int sound_textView=0x7f04003f;
+        public static final int sound_toggleButton=0x7f040040;
+        public static final int submit_button=0x7f040045;
         public static final int tabMode=0x7f040003;
         public static final int useLogo=0x7f040004;
         public static final int welcome_textView=0x7f040034;
-        public static final int word_editText=0x7f04003d;
+        public static final int word_editText=0x7f040044;
         public static final int wrap_content=0x7f040000;
-        public static final int wrong_textView=0x7f04003f;
+        public static final int wrong_textView=0x7f040046;
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f080000;
@@ -1022,16 +1031,18 @@ containing a value of this type.
         public static final int activity_highscore=0x7f030015;
         public static final int activity_main=0x7f030016;
         public static final int activity_name=0x7f030017;
-        public static final int activity_play=0x7f030018;
-        public static final int list_layout=0x7f030019;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001a;
-        public static final int sherlock_spinner_item=0x7f03001b;
+        public static final int activity_option=0x7f030018;
+        public static final int activity_play=0x7f030019;
+        public static final int list_layout=0x7f03001a;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001b;
+        public static final int sherlock_spinner_item=0x7f03001c;
     }
     public static final class menu {
         public static final int highscore=0x7f0b0000;
         public static final int main=0x7f0b0001;
         public static final int name=0x7f0b0002;
-        public static final int play=0x7f0b0003;
+        public static final int option=0x7f0b0003;
+        public static final int play=0x7f0b0004;
     }
     public static final class string {
         /**  Content description for the action bar "home" affordance. [CHAR LIMIT=NONE] 
@@ -1075,15 +1086,19 @@ containing a value of this type.
         public static final int abs__shareactionprovider_share_with_application=0x7f090007;
         public static final int action_settings=0x7f09000e;
         public static final int app_name=0x7f09000d;
-        public static final int enter_your_name=0x7f090017;
+        public static final int diacritice=0x7f09001b;
+        public static final int enter_your_name=0x7f090018;
         public static final int hello_world=0x7f09000f;
         public static final int high_scores=0x7f090013;
         public static final int play=0x7f090011;
         public static final int quit=0x7f090012;
-        public static final int submit=0x7f090015;
-        public static final int title_activity_highscore=0x7f090018;
-        public static final int title_activity_name=0x7f090016;
-        public static final int title_activity_play=0x7f090014;
+        public static final int settings=0x7f090014;
+        public static final int submit=0x7f090016;
+        public static final int sunete=0x7f09001c;
+        public static final int title_activity_highscore=0x7f090019;
+        public static final int title_activity_name=0x7f090017;
+        public static final int title_activity_option=0x7f09001a;
+        public static final int title_activity_play=0x7f090015;
         public static final int welcome=0x7f090010;
     }
     public static final class style {

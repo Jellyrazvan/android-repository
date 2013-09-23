@@ -32,9 +32,9 @@
         </activity>
         <activity
             android:name="com.the.dev.guys.fazan.NameActivity"
+            android:configChanges="orientation"
             android:label="@string/title_activity_name"
-            android:parentActivityName="com.the.dev.guys.fazan.PlayActivity"
-            android:configChanges="orientation" >
+            android:parentActivityName="com.the.dev.guys.fazan.PlayActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.the.dev.guys.fazan.PlayActivity" />
@@ -42,6 +42,14 @@
         <activity
             android:name="com.the.dev.guys.fazan.HighscoreActivity"
             android:label="@string/title_activity_highscore"
+            android:parentActivityName="com.the.dev.guys.fazan.MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.the.dev.guys.fazan.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.the.dev.guys.fazan.OptionActivity"
+            android:label="@string/title_activity_option"
             android:parentActivityName="com.the.dev.guys.fazan.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
