@@ -8,6 +8,7 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -115,7 +116,10 @@ public class HighscoreActivity extends SherlockActivity {
 			// more details, see the Navigation pattern on Android Design:
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
+			if (this.mRepository.get_sunet()){
+				final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+				mp.start();
+			}
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
@@ -127,6 +131,10 @@ public class HighscoreActivity extends SherlockActivity {
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if ((keyCode == KeyEvent.KEYCODE_BACK)) {
+			if (this.mRepository.get_sunet()){
+				final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+				mp.start();
+			}
 			NavUtils.navigateUpFromSameTask(this);
 		}
 		return true;

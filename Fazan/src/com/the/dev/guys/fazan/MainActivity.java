@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -46,13 +47,16 @@ public class MainActivity extends SherlockActivity {
 		mHighscoresButton = (Button) findViewById(R.id.highscores_button);  
 		mHighscoresButton.setTypeface(font);
 		
-		mSettingsButton = (Button) findViewById(R.id.settings_button);
-		mSettingsButton.setTypeface(font);
+		//mSettingsButton = (Button) findViewById(R.id.settings_button);
+		//mSettingsButton.setTypeface(font);
 		
 		if (getResources().getConfiguration().orientation == 
 				getResources().getConfiguration().ORIENTATION_PORTRAIT) {
 			mQuitButton = (Button) findViewById(R.id.quit_button);   
 			mQuitButton.setTypeface(font);
+			
+			mSettingsButton = (Button) findViewById(R.id.settings_button);
+			mSettingsButton.setTypeface(font);
 		}
 			
 		mWelcomeTextView = (TextView) findViewById(R.id.welcome_textView);
@@ -80,7 +84,6 @@ public class MainActivity extends SherlockActivity {
 		
 		mRepository.set_diacritice(diacriticeSetting);
 		mRepository.set_sunet(soundSetting);
-		Log.d("plm", "is aci");
 	}
 
 /////////////////////////////////////////////////////////////////////////
@@ -90,6 +93,25 @@ public class MainActivity extends SherlockActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getSupportMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+////////////////////////////////////////////////////////////////////////////////
+	
+	@Override
+	public boolean onOptionsItemSelected(com.actionbarsherlock.view.MenuItem item) {
+		switch (item.getItemId()) {
+		case android.R.id.home:
+			// This ID represents the Home or Up button. In the case of this
+			// activity, the Up button is shown. Use NavUtils to allow users
+			// to navigate up one level in the application structure. For
+			// more details, see the Navigation pattern on Android Design:
+			//
+			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
+			//
+			CloseApp(getCurrentFocus());
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
 	}
 	
 /////////////////////////////////////////////////////////////////////////

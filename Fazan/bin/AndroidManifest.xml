@@ -12,7 +12,7 @@
         android:allowBackup="true"
         android:icon="@drawable/ic_bird"
         android:label="@string/app_name"
-        android:theme="@style/Theme.Sherlock" >
+        android:theme="@style/AppBaseTheme" >
         <activity
             android:name="com.the.dev.guys.fazan.MainActivity"
             android:label="@string/app_name" >
@@ -34,7 +34,7 @@
             android:name="com.the.dev.guys.fazan.NameActivity"
             android:configChanges="orientation"
             android:label="@string/title_activity_name"
-            android:parentActivityName="com.the.dev.guys.fazan.PlayActivity" >
+            android:parentActivityName="com.the.dev.guys.fazan.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.the.dev.guys.fazan.PlayActivity" />

@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -170,6 +171,10 @@ public class PlayActivity extends SherlockActivity {
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			//
+			if (this.mRepository.get_sunet()){
+				final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+				mp.start();
+			}
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
@@ -178,7 +183,11 @@ public class PlayActivity extends SherlockActivity {
 	
 /////////////////////////////////////////////////////////////////////////
 	
-public boolean game(View view){
+	public boolean game(View view){
+		if (this.mRepository.get_sunet()){
+			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+			mp.start();
+		}
 		String text = mWordEditText.getText().toString().toLowerCase(Locale.getDefault());
 		Log.d("plm", Boolean.toString(mRepository.get_sunet()));
 		if (this.mRepository.find(text)){
@@ -249,6 +258,10 @@ public boolean game(View view){
 		b = Integer.toString(mWrongAnswers);
 		//mWrongTextView.setText("Wrong: " + b);
 		if (mWrongAnswers > 5){
+			if (this.mRepository.get_sunet()){
+				final MediaPlayer mp = MediaPlayer.create(this,R.raw.cheer);
+				mp.start();
+			}
 			Intent intent = new Intent(this, NameActivity.class);
 			String message = Integer.toString(this.mScore);
 			intent.putExtra(NameActivity.EXTRA_MESSAGE, message);

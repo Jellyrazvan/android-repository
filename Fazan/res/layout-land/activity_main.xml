@@ -69,4 +69,15 @@
         android:padding="7dp"
         android:src="@drawable/exit" />
 
+    <ImageButton
+        android:id="@+id/settings_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/quit_button"
+        android:layout_alignTop="@+id/welcome_textView"
+        android:padding="7dp"
+        android:background="@drawable/rounded_corners"
+        android:onClick="openSettingsActivity"
+        android:src="@drawable/settings" />
+
 </RelativeLayout>

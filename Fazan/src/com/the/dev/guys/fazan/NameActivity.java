@@ -5,8 +5,10 @@ import android.annotation.TargetApi;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
 import android.text.InputType;
 import android.view.KeyEvent;
 import android.view.View;
@@ -17,6 +19,7 @@ import android.widget.TextView;
 
 import com.actionbarsherlock.app.ActionBar;
 import com.actionbarsherlock.app.SherlockActivity;
+import com.the.dev.guys.Repository.Repository;
 
 
 public class NameActivity extends SherlockActivity {
@@ -24,6 +27,7 @@ public class NameActivity extends SherlockActivity {
 	
 	public final static String EXTRA_MESSAGE = "com.the.dev.guys.Fazan.Message";
 	
+	private Repository mRepository;
 	private String mMessage;
 	private TextView mScoreTextView;
 	private TextView mNameTextView;
@@ -38,6 +42,7 @@ public class NameActivity extends SherlockActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_name);
 		
+		mRepository = Repository.getRepository(getApplicationContext());
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.yellow)));
 		// Show the Up button in the action bar.
@@ -117,8 +122,11 @@ public class NameActivity extends SherlockActivity {
 			// more details, see the Navigation pattern on Android Design:
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
-			//
-			//NavUtils.navigateUpFromSameTask(this);
+			if (this.mRepository.get_sunet()){
+				final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+				mp.start();
+			}
+			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
@@ -135,6 +143,10 @@ public class NameActivity extends SherlockActivity {
 /////////////////////////////////////////////////////////////////////////
 	
 	public void SendName(View v){
+		if (this.mRepository.get_sunet()){
+			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+			mp.start();
+		}
 		String nume = mNameEditText.getText().toString();
 		//Log.d("QuizActivity", nume);
 		if (nume.equals("")){
