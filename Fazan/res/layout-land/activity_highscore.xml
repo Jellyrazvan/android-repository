@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background_template"
+    android:background="@color/background"
     tools:context=".HighscoreActivity" >
 
     <TextView
@@ -18,7 +18,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:text="@string/high_scores"
-        android:textColor="#ffffff"
+        android:textColor="#ff0000"
         android:textSize="24sp"
         android:paddingTop="10dp"
         android:textAppearance="?android:attr/textAppearanceLarge" />

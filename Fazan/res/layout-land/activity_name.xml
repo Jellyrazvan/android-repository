@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background_template"
+    android:background="@color/background"
     tools:context=".NameActivity" >
 
     <TextView
@@ -21,7 +21,7 @@
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="@drawable/circle_shape"
-        android:textColor="#ff0000"
+        android:textColor="#ffffff"
         android:textSize="18sp"
         android:text="TextView" />
 
@@ -47,13 +47,14 @@
         android:layout_alignLeft="@+id/score_textView"
         android:layout_centerVertical="true"
         android:layout_marginLeft="18dp"
-        android:background="@color/black"
+        android:background="@color/textfield"
         android:ems="10"
         android:inputType="textPersonName"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:paddingTop="5dp" >
+        android:paddingTop="5dp"
+        android:imeOptions="flagNoExtractUi" >
 
         <requestFocus />
     </EditText>
@@ -64,7 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/name_editText"
-        android:background="@color/black2"
+        android:background="@drawable/circle"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"

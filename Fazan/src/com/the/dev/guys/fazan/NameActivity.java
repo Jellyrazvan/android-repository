@@ -24,6 +24,7 @@ import com.the.dev.guys.Repository.Repository;
 
 public class NameActivity extends SherlockActivity {
 	private final static String KEY_NAME = "name";
+	private final static String KEY_HAS_CHEER_PLAYED = "cheer_key";
 	
 	public final static String EXTRA_MESSAGE = "com.the.dev.guys.Fazan.Message";
 	
@@ -33,6 +34,7 @@ public class NameActivity extends SherlockActivity {
 	private TextView mNameTextView;
 	private Button mNameButton;
 	private EditText mNameEditText;
+	private MediaPlayer mMediaPlayer;
 	
 	
 /////////////////////////////////////////////////////////////////////////
@@ -44,10 +46,20 @@ public class NameActivity extends SherlockActivity {
 		
 		mRepository = Repository.getRepository(getApplicationContext());
 		ActionBar bar = getSupportActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.yellow)));
+		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
 		// Show the Up button in the action bar.
 		//setupActionBar();
 		bar.setDisplayHomeAsUpEnabled(true);
+		
+		boolean hasAlreadyPlayed = false;
+		if (savedInstanceState != null) {
+			hasAlreadyPlayed = savedInstanceState.getBoolean(KEY_HAS_CHEER_PLAYED, false);
+		}
+		
+		if (this.mRepository.get_sunet() && !hasAlreadyPlayed){
+			mMediaPlayer = MediaPlayer.create(this,R.raw.cheer);
+			mMediaPlayer.start();
+		}
 		
 		Typeface cartonSlabFont = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf");
 		
@@ -85,6 +97,7 @@ public class NameActivity extends SherlockActivity {
 		super.onSaveInstanceState(savedInstanceState);
 		String name = mNameEditText.getText().toString();
 		savedInstanceState.putString(KEY_NAME, name);
+		savedInstanceState.putBoolean(KEY_HAS_CHEER_PLAYED, true);
 	}
 
 /////////////////////////////////////////////////////////////////////////
@@ -157,5 +170,15 @@ public class NameActivity extends SherlockActivity {
 		mMessage=mMessage + ";" + nume;
 		intent2.putExtra(EXTRA_MESSAGE, mMessage);
 		startActivity(intent2);
+	}
+	
+/////////////////////////////////////////////////////////////////////////
+
+	public void onPause(){
+		super.onPause();
+		if (mMediaPlayer != null){
+			mMediaPlayer.stop();
+			mMediaPlayer.release();
+		}
 	}
 }

@@ -19,6 +19,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
@@ -33,6 +34,7 @@ public class PlayActivity extends SherlockActivity {
 	private static final String KEY_WRITTEN_WORD = "writtenword";
 	private static final String KEY_SCORE = "score";
 	private static final String KEY_WRONG_ANSWERS = "wronganswers";
+	private static final String KEY_WORNG_TEXT = "wrongtext";
 	
 	private int mScore;
 	private int mWrongAnswers;
@@ -40,6 +42,7 @@ public class PlayActivity extends SherlockActivity {
 	private TextView mGivenWordTextView;
 	private TextView mScoreTextView;
 	private TextView mWrongTextView;
+	private TextView mBackgroundScoreTextView;
 	private EditText mWordEditText;
 	private Button mSubmitButton;
 	
@@ -58,7 +61,7 @@ public class PlayActivity extends SherlockActivity {
 		}
 		
 		ActionBar bar = getSupportActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.green)));
+		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
 		// Show the Up button in the action bar.
 		//setupActionBar();
 		bar.setDisplayHomeAsUpEnabled(true);
@@ -66,7 +69,11 @@ public class PlayActivity extends SherlockActivity {
 		mRepository = Repository.getRepository(getApplicationContext());
 		if (mRepository.getVector().isEmpty()) {
 			try {
-				mRepository.loadWordsFromFile(Repository.DIACRITICE_FILENAME);
+				if (mRepository.get_diacritice()){
+					mRepository.loadWordsFromFile(Repository.DIACRITICE_FILENAME);
+				} else {
+					mRepository.loadWordsFromFile(Repository.FARA_DIACRITICE_FILENAME);
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -95,11 +102,18 @@ public class PlayActivity extends SherlockActivity {
 		String scor = null;
 		scor = "Score: " + this.mScore;
 		mScoreTextView.setText(scor);
-		mScoreTextView.setTypeface(robotoThinFont);
+		//mScoreTextView.setTypeface(robotoMediumFont);
+		
+		mBackgroundScoreTextView = (TextView) findViewById(R.id.background_score);
+		mBackgroundScoreTextView.setText(Integer.toString(mScore));
+		mBackgroundScoreTextView.setTypeface(robotoMediumFont);
 		
 		mWrongTextView = (TextView) findViewById(R.id.wrong_textView);
-		mWrongTextView.setTypeface(robotoMediumFont);
+		//mWrongTextView.setTypeface(robotoMediumFont);
 		//mWrongTextView.setText("Wrong: " + mWrongAnswers);
+		if (savedInstanceState != null) {
+			mWrongTextView.setText(savedInstanceState.getString(KEY_WORNG_TEXT));
+		}
 		
 		mWordEditText = (EditText) findViewById(R.id.word_editText);
 		mWordEditText.setInputType(InputType.TYPE_CLASS_TEXT 
@@ -121,6 +135,7 @@ public class PlayActivity extends SherlockActivity {
 		
 		mSubmitButton = (Button) findViewById(R.id.submit_button);
 		mSubmitButton.setTypeface(cartonSlabFont);
+		
 	}
 	
 /////////////////////////////////////////////////////////////////////
@@ -134,6 +149,7 @@ public class PlayActivity extends SherlockActivity {
 		savedInstanceState.putString(KEY_WRITTEN_WORD, writtenWord);
 		savedInstanceState.putInt(KEY_SCORE, mScore);
 		savedInstanceState.putInt(KEY_WRONG_ANSWERS, mWrongAnswers);
+		savedInstanceState.putString(KEY_WORNG_TEXT, mWrongTextView.getText().toString());
 	}
 	
 /////////////////////////////////////////////////////////////////////////
@@ -217,51 +233,48 @@ public class PlayActivity extends SherlockActivity {
 		String scor = new String();
 		scor = "Score: " + mScore;
 		mScoreTextView.setText(scor);
+		mBackgroundScoreTextView.setText(Integer.toString(mScore));
 		switch (mWrongAnswers) {
 		case 1:
 			Spannable WordtoSpan = new SpannableString("F");
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			mWrongTextView.setText(WordtoSpan);
 			break;
 		case 2:
 			WordtoSpan = new SpannableString("FA");
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			mWrongTextView.setText(WordtoSpan);
 			break;
 		case 3:
 			WordtoSpan = new SpannableString("FAZ");
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.GREEN), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			mWrongTextView.setText(WordtoSpan);
 			break;
 		case 4:
 			WordtoSpan = new SpannableString("FAZA");
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.GREEN), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.CYAN), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			mWrongTextView.setText(WordtoSpan);
 			break;
 		case 5:
 			WordtoSpan = new SpannableString("FAZAN");
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.RED), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.BLUE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.GREEN), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.CYAN), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-			WordtoSpan.setSpan(new ForegroundColorSpan(Color.MAGENTA), 4, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 0, 1, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 1, 2, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 2, 3, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 3, 4, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+			WordtoSpan.setSpan(new ForegroundColorSpan(Color.WHITE), 4, 5, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 			mWrongTextView.setText(WordtoSpan);
 			break;
 		}
 		String b = new String();
 		b = Integer.toString(mWrongAnswers);
 		//mWrongTextView.setText("Wrong: " + b);
-		if (mWrongAnswers > 5){
-			if (this.mRepository.get_sunet()){
-				final MediaPlayer mp = MediaPlayer.create(this,R.raw.cheer);
-				mp.start();
-			}
+		if (mWrongAnswers == 5){
 			Intent intent = new Intent(this, NameActivity.class);
 			String message = Integer.toString(this.mScore);
 			intent.putExtra(NameActivity.EXTRA_MESSAGE, message);

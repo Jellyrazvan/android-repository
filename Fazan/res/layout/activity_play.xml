@@ -1,81 +1,106 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background_template_play"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".PlayActivity" >
+    android:background="#faf4f0">
+    
+    <TextView 
+        android:id="@+id/background_score"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="100dp"
+        android:text="Sc"
+        android:textSize="160sp"
+        android:gravity="center"
+        android:textColor="#44ff0000"/>
 
-    <TextView
-        android:id="@+id/given_word_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="72dp"
-        android:background="@drawable/circle"
-        android:paddingTop="8dp"
-        android:paddingBottom="8dp"
-        android:paddingLeft="12dp"
-        android:paddingRight="12dp"
-        android:textColor="#ffffff"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <EditText
-        android:id="@+id/word_editText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:paddingTop="5dp"
-        android:paddingBottom="5dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:background="@color/black"
-        android:ems="10"
-        android:singleLine="true"
-        android:imeOptions="actionDone" />
-
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/word_editText"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="72dp"
-        android:background="@drawable/rounded_corners"
-        android:drawableLeft="@drawable/ok"
-       	android:paddingLeft="8dp"
-       	android:paddingRight="8dp"
-        android:textColor="#ffffff"
-        android:text="@string/submit"
-        android:onClick="game" />
-
-    <TextView
-        android:id="@+id/score_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:text="Small Text"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/wrong_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/score_textView"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:textColor="#ffffff"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-</RelativeLayout>
+	<RelativeLayout 
+	    android:id="@+id/play_activity_main_layout"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:paddingBottom="@dimen/activity_vertical_margin"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin"
+	    tools:context=".PlayActivity" >
+	
+	    <TextView
+	        android:id="@+id/given_word_textView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="72dp"
+	        android:background="@drawable/circle"
+	        android:paddingTop="8dp"
+	        android:paddingBottom="8dp"
+	        android:paddingLeft="12dp"
+	        android:paddingRight="12dp"
+	        android:textColor="#ffffff"
+	        android:text="Large Text"
+	        android:textAppearance="?android:attr/textAppearanceLarge" />
+	
+	    <EditText
+	        android:id="@+id/word_editText"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_centerHorizontal="true"
+	        android:layout_centerVertical="true"
+	        android:paddingTop="5dp"
+	        android:paddingBottom="5dp"
+	        android:paddingLeft="10dp"
+	        android:paddingRight="10dp"
+	        android:background="@color/textfield"
+	        android:ems="10"
+	        android:singleLine="true"
+	        android:imeOptions="actionDone" />
+	
+	    <Button
+	        android:id="@+id/submit_button"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_below="@+id/word_editText"
+	        android:layout_centerHorizontal="true"
+	        android:layout_marginTop="72dp"
+	        android:background="@drawable/rounded_corners"
+	        android:drawableLeft="@drawable/ok"
+	       	android:paddingLeft="8dp"
+	       	android:paddingRight="8dp"
+	        android:textColor="#ffffff"
+	        android:text="@string/submit"
+	        android:onClick="game" />
+	
+	    <TextView
+	        android:id="@+id/score_textView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:background="@drawable/bullets"
+	        android:layout_alignParentLeft="true"
+	        android:layout_alignParentTop="true"
+	        android:text="Small Text"
+	        android:textColor="#ffffff"
+	        android:paddingLeft="8dp"
+	        android:paddingRight="8dp"
+	        android:paddingBottom="2dp"
+	        android:textSize="20sp"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	
+	    <TextView
+	        android:id="@+id/wrong_textView"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignBottom="@+id/score_textView"
+	        android:layout_alignParentRight="true"
+	        android:layout_alignParentTop="true"
+	        android:background="@drawable/rounded_corners_wrong"
+	        android:paddingLeft="4dp"
+	        android:paddingRight="4dp"
+	        android:paddingBottom="2dp"
+	        android:textColor="#ffffff"
+	        android:textSize="20sp"
+	        android:textStyle="bold"
+	        android:textAppearance="?android:attr/textAppearanceSmall" />
+	
+	</RelativeLayout>
+</FrameLayout>

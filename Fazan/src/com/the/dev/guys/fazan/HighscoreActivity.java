@@ -22,7 +22,9 @@ import com.actionbarsherlock.app.SherlockActivity;
 import com.the.dev.guys.Domain.Player;
 import com.the.dev.guys.Repository.Repository;
 
+
 public class HighscoreActivity extends SherlockActivity {
+	private static final String KEY_EXTRA_ADDED = "extra_added";
 	
 	private Repository mRepository;
 	private ListView mHighScoresListView;
@@ -40,7 +42,7 @@ public class HighscoreActivity extends SherlockActivity {
 		mHighScoresListView = (ListView) findViewById(R.id.highscores_listView);
 		
 		ActionBar bar = getSupportActionBar();
-		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.yellow)));
+		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
 		// Show the Up button in the action bar.
 		//setupActionBar();
 		bar.setDisplayHomeAsUpEnabled(true);
@@ -52,8 +54,12 @@ public class HighscoreActivity extends SherlockActivity {
 			e1.printStackTrace();
 		}
 		
+		boolean isPlayerAdded = false;
+		if (savedInstanceState != null)
+			isPlayerAdded = true;
+		
 		Intent intent = getIntent();
-		if (intent.hasExtra(NameActivity.EXTRA_MESSAGE)){
+		if (intent.hasExtra(NameActivity.EXTRA_MESSAGE) && !isPlayerAdded){
 			String message = intent.getStringExtra(NameActivity.EXTRA_MESSAGE);
 			String messageList[] = message.split(";");
 			String name = messageList[1];
@@ -81,6 +87,11 @@ public class HighscoreActivity extends SherlockActivity {
 		mHighScoresTextView = (TextView) findViewById(R.id.highscores_textView);
 		Typeface cartonSlabFont = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf"); 
 		mHighScoresTextView.setTypeface(cartonSlabFont);
+	}
+	
+	@Override
+	public void onSaveInstanceState(Bundle savedInstanceState) {
+		savedInstanceState.putBoolean(KEY_EXTRA_ADDED, true);
 	}
 		
 /////////////////////////////////////////////////////////////////////////

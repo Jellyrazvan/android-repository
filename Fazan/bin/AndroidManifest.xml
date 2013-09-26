@@ -37,7 +37,7 @@
             android:parentActivityName="com.the.dev.guys.fazan.MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.the.dev.guys.fazan.PlayActivity" />
+                android:value="com.the.dev.guys.fazan.MainActivity" />
         </activity>
         <activity
             android:name="com.the.dev.guys.fazan.HighscoreActivity"

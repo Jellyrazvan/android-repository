@@ -3,12 +3,14 @@ package com.the.dev.guys.fazan;
 import java.io.IOException;
 
 import android.annotation.TargetApi;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 
 import com.actionbarsherlock.app.ActionBar;
@@ -21,6 +23,8 @@ public class OptionActivity extends SherlockActivity {
 	
 	private ToggleButton mSoundButton;
 	private ToggleButton mDiacriticsButton;
+	private TextView mSettingsTextView, mDiacriticeTextView,
+			mSoundsTextView;
 	
 	private Repository mRepository;
 
@@ -32,6 +36,18 @@ public class OptionActivity extends SherlockActivity {
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
 		bar.setDisplayHomeAsUpEnabled(true);
+		
+		Typeface font = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf");
+		Typeface robotoMediumFont = Typeface.createFromAsset(getAssets(), "fonts/Roboto-Medium.ttf"); 
+		
+		mSettingsTextView = (TextView) findViewById(R.id.settings_textView);
+		mSettingsTextView.setTypeface(font);
+		
+		mDiacriticeTextView = (TextView) findViewById(R.id.diacritice_textView);
+		mDiacriticeTextView.setTypeface(robotoMediumFont);
+		
+		mSoundsTextView = (TextView) findViewById(R.id.sound_textView);
+		mSoundsTextView.setTypeface(robotoMediumFont);
 		
 		mSoundButton = (ToggleButton) findViewById(R.id.sound_toggleButton);
 		mDiacriticsButton = (ToggleButton) findViewById(R.id.diacritice_toggleButton);

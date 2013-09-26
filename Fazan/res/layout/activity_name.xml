@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/background_template"
+    android:background="@color/background"
     tools:context=".NameActivity" >
 
     <TextView
@@ -20,7 +20,7 @@
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="@color/black2"
+        android:background="@drawable/circle"
         android:text="@string/enter_your_name"
         android:textColor="#ffffff"
         android:textSize="18sp" />
@@ -37,7 +37,7 @@
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
-        android:background="@color/black"
+        android:background="@color/textfield"
         android:inputType="textPersonName" 
         android:singleLine="true"
         android:imeOptions="actionDone">
@@ -67,12 +67,12 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
-         android:paddingTop="5dp"
+        android:paddingTop="5dp"
         android:paddingBottom="5dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:background="@drawable/circle_shape"
-        android:textColor="#ff0000"
+        android:textColor="#ffffff"
         android:textSize="18sp"
         android:text="TextView" />
 

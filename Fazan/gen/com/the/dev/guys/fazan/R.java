@@ -686,14 +686,16 @@ containing a value of this type.
         public static final int abs__bright_foreground_disabled_holo_light=0x7f070005;
         public static final int abs__bright_foreground_holo_dark=0x7f070002;
         public static final int abs__bright_foreground_holo_light=0x7f070003;
-        public static final int abs__primary_text_disable_only_holo_dark=0x7f07000c;
-        public static final int abs__primary_text_disable_only_holo_light=0x7f07000d;
-        public static final int abs__primary_text_holo_dark=0x7f07000e;
-        public static final int abs__primary_text_holo_light=0x7f07000f;
+        public static final int abs__primary_text_disable_only_holo_dark=0x7f07000e;
+        public static final int abs__primary_text_disable_only_holo_light=0x7f07000f;
+        public static final int abs__primary_text_holo_dark=0x7f070010;
+        public static final int abs__primary_text_holo_light=0x7f070011;
+        public static final int background=0x7f07000c;
         public static final int black=0x7f070007;
         public static final int black2=0x7f070008;
         public static final int green=0x7f07000a;
         public static final int red=0x7f070009;
+        public static final int textfield=0x7f07000d;
         public static final int white=0x7f070006;
         public static final int yellow=0x7f07000b;
     }
@@ -918,16 +920,18 @@ containing a value of this type.
         public static final int abs__toast_frame=0x7f02006f;
         public static final int background_template=0x7f020070;
         public static final int background_template_play=0x7f020071;
-        public static final int circle=0x7f020072;
-        public static final int circle_shape=0x7f020073;
-        public static final int exit=0x7f020074;
-        public static final int game=0x7f020075;
-        public static final int ic_bird=0x7f020076;
-        public static final int list=0x7f020077;
-        public static final int ok=0x7f020078;
-        public static final int rounded_corners=0x7f020079;
-        public static final int rounded_corners_toggle_button=0x7f02007a;
-        public static final int settings=0x7f02007b;
+        public static final int bullets=0x7f020072;
+        public static final int circle=0x7f020073;
+        public static final int circle_shape=0x7f020074;
+        public static final int exit=0x7f020075;
+        public static final int game=0x7f020076;
+        public static final int ic_bird=0x7f020077;
+        public static final int list=0x7f020078;
+        public static final int ok=0x7f020079;
+        public static final int rounded_corners=0x7f02007a;
+        public static final int rounded_corners_toggle_button=0x7f02007b;
+        public static final int rounded_corners_wrong=0x7f02007c;
+        public static final int settings=0x7f02007d;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050020;
@@ -969,12 +973,12 @@ containing a value of this type.
         public static final int abs__textButton=0x7f050013;
         public static final int abs__title=0x7f05001b;
         public static final int abs__up=0x7f05000b;
-        public static final int action_settings=0x7f050047;
+        public static final int background_score=0x7f050043;
         public static final int diacritice_textView=0x7f050041;
         public static final int diacritice_toggleButton=0x7f050042;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f050026;
-        public static final int given_word_textView=0x7f050043;
+        public static final int given_word_textView=0x7f050045;
         public static final int highscores_button=0x7f050036;
         public static final int highscores_listView=0x7f050033;
         public static final int highscores_textView=0x7f050032;
@@ -985,6 +989,7 @@ containing a value of this type.
         public static final int name_editText=0x7f05003a;
         public static final int name_textView=0x7f050039;
         public static final int normal=0x7f050001;
+        public static final int play_activity_main_layout=0x7f050044;
         public static final int play_button=0x7f050035;
         public static final int quit_button=0x7f050038;
         public static final int score_textView=0x7f05003c;
@@ -995,13 +1000,13 @@ containing a value of this type.
         public static final int showTitle=0x7f050007;
         public static final int sound_textView=0x7f05003f;
         public static final int sound_toggleButton=0x7f050040;
-        public static final int submit_button=0x7f050045;
+        public static final int submit_button=0x7f050047;
         public static final int tabMode=0x7f050003;
         public static final int useLogo=0x7f050004;
         public static final int welcome_textView=0x7f050034;
-        public static final int word_editText=0x7f050044;
+        public static final int word_editText=0x7f050046;
         public static final int wrap_content=0x7f050000;
-        public static final int wrong_textView=0x7f050046;
+        public static final int wrong_textView=0x7f050048;
     }
     public static final class integer {
         public static final int abs__max_action_buttons=0x7f090000;
