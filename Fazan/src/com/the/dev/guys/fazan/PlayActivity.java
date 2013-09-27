@@ -205,7 +205,6 @@ public class PlayActivity extends SherlockActivity {
 			mp.start();
 		}
 		String text = mWordEditText.getText().toString().toLowerCase(Locale.getDefault());
-		Log.d("plm", Boolean.toString(mRepository.get_sunet()));
 		if (this.mRepository.find(text)){
 			String word = mRepository.findBy(text.substring(text.length()-2, text.length()));
 			if (word.equals("0")){

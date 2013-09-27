@@ -3,13 +3,17 @@ package com.the.dev.guys.fazan;
 import java.io.IOException;
 
 import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.view.ContextThemeWrapper;
 import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
@@ -70,6 +74,20 @@ public class OptionActivity extends SherlockActivity {
 			public void onClick(View v) {
 				final MediaPlayer mp = MediaPlayer.create(OptionActivity.this,R.raw.onoff);
 				mp.start();
+			}
+		});
+		mDiacriticsButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+			
+			@Override
+			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+				if (isChecked) {
+					new AlertDialog.Builder(buttonView.getContext()).setTitle("Important")
+					.setMessage("Pentru a folosi aceastã opþiune este nevoie ca" +
+							" tastatura sã fie setatã pe limba românã. Asigurã-te cã tastatura ta " + 
+							"suportã caractere cu diacritice înainte de a folosi aceastã opþiune.")
+					.setNeutralButton("OK", null).show();
+				}
+				
 			}
 		});
 	}

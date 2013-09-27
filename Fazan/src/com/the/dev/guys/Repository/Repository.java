@@ -112,6 +112,19 @@ public class Repository {
 		return false;
 	}
 	
+/////////////////////////////////////////////////////////////////////
+	
+	public boolean hasNext(String value){
+		String valueEnd = value.substring(value.length() - 2, value.length());
+		for (Word el: mWordsVector){
+			String text = el.get_text().substring(0, 2);
+			if (((text.equals(valueEnd)) && (el.get_verify() == false))){
+				return true;
+			}
+		}
+		return false;
+	}
+	
 ////////////////////////////////////////////////////////////
 
 	
@@ -161,8 +174,12 @@ public class Repository {
 	
 	public String getRandom(){
 		Random generator = new Random();
-		int index = generator.nextInt(mWordsVector.size());
-		String result = mWordsVector.get(index).get_text();
+		String result;
+		int index;
+		do {
+			index = generator.nextInt(mWordsVector.size());
+			result = mWordsVector.get(index).get_text();
+		} while (!hasNext(result));
 		mWordsVector.get(index).set_verify(true);
 		return result.toUpperCase(Locale.getDefault());
 	}
