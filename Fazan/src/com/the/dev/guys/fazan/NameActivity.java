@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -157,8 +158,16 @@ public class NameActivity extends SherlockActivity {
 	
 	public void SendName(View v){
 		if (this.mRepository.get_sunet()){
-			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+			MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+			mp.setOnCompletionListener(new OnCompletionListener() {
+				
+				@Override
+				public void onCompletion(MediaPlayer mp) {
+					mp.release();
+				}
+			});
 			mp.start();
+			mp = null;
 		}
 		String nume = mNameEditText.getText().toString();
 		//Log.d("QuizActivity", nume);
@@ -179,6 +188,7 @@ public class NameActivity extends SherlockActivity {
 		if (mMediaPlayer != null){
 			mMediaPlayer.stop();
 			mMediaPlayer.release();
+			mMediaPlayer = null;
 		}
 	}
 }

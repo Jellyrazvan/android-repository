@@ -1,13 +1,16 @@
 package com.the.dev.guys.fazan;
 
 
-import android.app.AlertDialog;
+import java.util.concurrent.ExecutionException;
+
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.NavUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,10 +26,29 @@ public class MainActivity extends SherlockActivity {
 	public static final String SAVED_SETTINGS = "savedsettings"; 
 	
 	private TextView mWelcomeTextView;
+	private MediaPlayer mMediaPlayer;
 	private Button mPlayButton, mHighscoresButton,
 			mQuitButton, mSettingsButton;
 	
 	private Repository mRepository;
+	
+public class BackgroundThread extends AsyncTask<Void, Void, Repository> {
+		
+		
+		@Override
+		protected void onPreExecute() {
+		}
+		
+		@Override
+		protected Repository doInBackground(Void... voids){
+			return Repository.getRepository(getApplicationContext());
+		}
+		
+		@Override
+		protected void onPostExecute(Repository result) {
+		}
+
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +56,19 @@ public class MainActivity extends SherlockActivity {
 		
 		setContentView(R.layout.activity_main);
 		
-		mRepository = Repository.getRepository(getApplicationContext());
+		BackgroundThread backgroundThread = new BackgroundThread();
+		backgroundThread.execute();
+		try {
+			mRepository = backgroundThread.get();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		mMediaPlayer = MediaPlayer.create(this,R.raw.click);
 		
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
@@ -65,10 +99,14 @@ public class MainActivity extends SherlockActivity {
 		boolean firstRun = getSharedPreferences(FIRST_RUN, MODE_PRIVATE)
 				.getBoolean("firstRunValue", true);
 		if (firstRun){
-			new AlertDialog.Builder(this).setTitle("Instrucþiuni")
-					.setMessage("Regulile jocului sunt foarte simple, trebuie " +
-					"sã faci cât mai multe cuvinte cu ultimele douã litere ale cuvântului anterior! Baftã!")
-					.setNeutralButton("OK", null).show();
+			String text = "Regulile jocului sunt foarte simple, trebuie " +
+					"sã faci cât mai multe cuvinte cu ultimele douã litere ale cuvântului anterior! Baftã!";
+			//new AlertDialog.Builder(this).setTitle("Instrucþiuni")
+			//		.setMessage("Regulile jocului sunt foarte simple, trebuie " +
+			//		"sã faci cât mai multe cuvinte cu ultimele douã litere ale cuvântului anterior! Baftã!")
+			//		.setNeutralButton("OK", null).show();
+			CustomDialog cd = new CustomDialog(this, text);
+			cd.show();
 		}
 		
 		// Save the state
@@ -110,16 +148,33 @@ public class MainActivity extends SherlockActivity {
 			//
 			CloseApp(getCurrentFocus());
 			return true;
+		case R.id.facebook:
+			facebook(getCurrentFocus());
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}
 	
 /////////////////////////////////////////////////////////////////////////
 	
+	public void onResume() {
+		super.onResume();
+		mMediaPlayer = MediaPlayer.create(this,R.raw.click);
+	}
+	
+///////////////////////////////////////////////////////////////////////////
+	
+	public void onStop() {
+		super.onStop();
+		mMediaPlayer.release();
+		mMediaPlayer = null;
+	}
+	
+/////////////////////////////////////////////////////////////////////////
+	
 	public void openPlayActivity(View view){
 		if (this.mRepository.get_sunet()){
-			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
-			mp.start();
+			mMediaPlayer.start();
 		}
 		Intent intent=new Intent(this, PlayActivity.class);
 		startActivity(intent);
@@ -129,8 +184,7 @@ public class MainActivity extends SherlockActivity {
 	
 	public void CloseApp(View view){
 		if (this.mRepository.get_sunet()){
-			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
-			mp.start();
+			mMediaPlayer.start();
 		}
 		getSharedPreferences(SAVED_SETTINGS, MODE_PRIVATE)
 				.edit()
@@ -145,8 +199,7 @@ public class MainActivity extends SherlockActivity {
 	
 	public void openHighScores(View view){
 		if (this.mRepository.get_sunet()){
-			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
-			 mp.start();
+			mMediaPlayer.start();
 		}
 		Intent intent = new Intent(this, HighscoreActivity.class);
 		startActivity(intent);
@@ -156,10 +209,31 @@ public class MainActivity extends SherlockActivity {
 
 	public void openSettingsActivity(View view){
 		if (this.mRepository.get_sunet()){
-			final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
-			mp.start();
+			mMediaPlayer.start();
 		}
 		Intent intent=new Intent(this, OptionActivity.class);
 		startActivity(intent);
 	}
+
+public void facebook(View view){
+	if (this.mRepository.get_sunet()){
+		mMediaPlayer.start();
+	}
+	//Log.d("plm", "facebook");
+	 Intent intent=getOpenFacebookIntent(getApplicationContext());
+	 startActivity(intent);
+	 //Log.d("plm", "facebookasd");
+	 }
+
+	 
+	  public static Intent getOpenFacebookIntent(Context context) {
+
+	      try {
+	       context.getPackageManager().getPackageInfo("com.facebook.katana", 0);
+	       return new Intent(Intent.ACTION_VIEW, Uri.parse("fb://profile/1428542174023832"));
+	      } catch (Exception e) {
+	       return new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.facebook.com/FazanRo"));
+	      }
+	   }
+
 }

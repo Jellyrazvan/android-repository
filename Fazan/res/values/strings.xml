@@ -18,5 +18,15 @@
     
     <string name="diacritice">Diacritice</string>
     <string name="sunete">Sunete</string>
+    
+    <string name="definition">Vezi Explicaţie</string>
+    
+    <string name="facebook">Like</string>
+    <string name="suggestion">Sugestie</string>
+    
+    <string name="suggestion_text_view">Sugerează cuvânt:</string>
+    
+    <string name="send">Send</string>
+    <string name="cancel">Cancel</string>
 
 </resources>

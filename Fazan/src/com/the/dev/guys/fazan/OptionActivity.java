@@ -7,10 +7,10 @@ import android.app.AlertDialog;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.CompoundButton.OnCheckedChangeListener;
@@ -65,6 +65,15 @@ public class OptionActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				final MediaPlayer mp = MediaPlayer.create(OptionActivity.this,R.raw.onoff);
+				mp.setOnCompletionListener(new OnCompletionListener() {
+					
+					@Override
+					public void onCompletion(MediaPlayer mp) {
+						mp.release();
+						mp = null;
+						
+					}
+				});
 				mp.start();
 			}
 		});
@@ -73,7 +82,17 @@ public class OptionActivity extends SherlockActivity {
 			@Override
 			public void onClick(View v) {
 				final MediaPlayer mp = MediaPlayer.create(OptionActivity.this,R.raw.onoff);
+				mp.setOnCompletionListener(new OnCompletionListener() {
+					
+					@Override
+					public void onCompletion(MediaPlayer mp) {
+						mp.release();
+						mp = null;
+						
+					}
+				});
 				mp.start();
+				
 			}
 		});
 		mDiacriticsButton.setOnCheckedChangeListener(new OnCheckedChangeListener() {
@@ -81,11 +100,14 @@ public class OptionActivity extends SherlockActivity {
 			@Override
 			public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 				if (isChecked) {
-					new AlertDialog.Builder(buttonView.getContext()).setTitle("Important")
-					.setMessage("Pentru a folosi aceastã opþiune este nevoie ca" +
+					String text = "Pentru a folosi aceastã opþiune este nevoie ca" +
 							" tastatura sã fie setatã pe limba românã. Asigurã-te cã tastatura ta " + 
-							"suportã caractere cu diacritice înainte de a folosi aceastã opþiune.")
-					.setNeutralButton("OK", null).show();
+							"suportã caractere cu diacritice înainte de a folosi aceastã opþiune.";
+					//new AlertDialog.Builder(buttonView.getContext()).setTitle("Important")
+					//.setMessage(text)
+					//.setNeutralButton("OK", null).show();
+					CustomDialog cd = new CustomDialog(OptionActivity.this, text);
+					cd.show();
 				}
 				
 			}
@@ -151,6 +173,15 @@ public class OptionActivity extends SherlockActivity {
 			//
 			if (this.mRepository.get_sunet()){
 				final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
+				mp.setOnCompletionListener(new OnCompletionListener() {
+					
+					@Override
+					public void onCompletion(MediaPlayer mp) {
+						mp.release();
+						mp = null;
+						
+					}
+				});
 				mp.start();
 			}
 			NavUtils.navigateUpFromSameTask(this);

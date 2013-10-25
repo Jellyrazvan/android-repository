@@ -7,15 +7,35 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 import java.util.Vector;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONException;
+
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.os.AsyncTask;
+import android.util.Log;
 
 import com.the.dev.guys.Domain.Player;
 import com.the.dev.guys.Domain.Word;
+import com.the.dev.guys.fazan.HighScoresHandler;
+import com.the.dev.guys.fazan.MainActivity;
 
 
 public class Repository {
@@ -29,10 +49,98 @@ public class Repository {
 	private Vector<Word> mWordsVector;
 	private Vector<Player> mHighScoresVector;
 	private Context mAppContext;
+	private Context mProgressDialogContext;
+	private ProgressDialog mProgressDialog;
 	
 	private boolean diacritice;
-    private boolean sunet;
+	private boolean sunet;
 	
+//////////////////////////////////////////////////////////////////////////////////////
+	
+	public void setProgressDialogContext(Context dialogContext) {
+		mProgressDialogContext = dialogContext;
+	}
+	
+	public class LoadHighScoresThread extends AsyncTask<Void, Void, Vector<Player>> {
+		
+		@Override
+		protected void onPreExecute() {
+			mProgressDialog = ProgressDialog.show(mProgressDialogContext, "", "Please wait");
+		}
+		
+		@Override
+		protected Vector<Player> doInBackground(Void... voids){
+			HighScoresHandler highscoresHandler = new HighScoresHandler();
+			try {
+				Vector<Player> array = highscoresHandler
+						.getPlayersFromServer("http://thedevguys.us.to/users.json");
+						//.getPlayersFromServer("http://192.168.1.181:3000/users.json");
+				/*try {
+					Thread.sleep(5000);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}*/
+				return array;
+			} catch (JSONException e) {
+				//Log.d("plm", "JSONEXCEPTION" + e);
+				e.printStackTrace();
+			} catch (IOException e) {
+				//Log.d("plm", "IOEXCEPTION" + e);
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Vector<Player> result) {
+			mProgressDialog.dismiss();
+		}
+
+	}
+	
+////////////////////////////////////////////////////////////
+	
+public class AddHighScoresThread extends AsyncTask<String, Void, String> {
+		
+		@Override
+		protected String doInBackground(String... strings){
+			HttpClient httpclient = new DefaultHttpClient();
+		    HttpPost httppost = new HttpPost("http://thedevguys.us.to/users/");
+			//HttpPost httppost = new HttpPost("http://192.168.1.181:3000/users/");
+
+		    try {
+		        // Add your data
+		        List<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>(2);
+		        nameValuePairs.add(new BasicNameValuePair("name", strings[0]));
+		        nameValuePairs.add(new BasicNameValuePair("score", strings[1]));
+		        httppost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+
+		        // Execute HTTP Post Request
+		        HttpResponse response = httpclient.execute(httppost);
+		        return response.toString();
+		    } catch (ClientProtocolException e) {
+		        // TODO Auto-generated catch block
+		    } catch (IOException e) {
+		        // TODO Auto-generated catch block
+		    }
+		    return null;
+		}
+
+	}
+	
+////////////////////////////////////////////////////////////
+	
+	public static String getWithoutDiacritics(String string) {
+		string = string.replace("Ã", "A")
+				.replace("Î", "I")
+				.replace("ª", "S")
+				.replace("Þ", "T")
+				.replace("Â", "A");
+		Log.d("plm", string);
+		return string;
+	}
 	
 ////////////////////////////////////////////////////////////
 
@@ -45,7 +153,6 @@ public class Repository {
 	private Repository(Context context){
 		mAppContext = context;
 		mWordsVector = new Vector<Word>(73000,1000);
-		mHighScoresVector = new Vector<Player>(6,1);
 	}
 	
 //////////////////////////////////////////////////////////////
@@ -140,6 +247,30 @@ public class Repository {
 		return mHighScoresVector;
 	}
 	
+//////////////////////////////////////////////////////////////////////
+	
+	public void loadHighScoresFromServer(Context context) {
+		mProgressDialogContext = context;
+		LoadHighScoresThread bg = new LoadHighScoresThread();
+		bg.execute();
+		try {
+			try {
+				mHighScoresVector = bg.get(3, TimeUnit.SECONDS);
+			} catch (TimeoutException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		} catch (InterruptedException e) {
+			//Log.d("plm", "IntrreputedException" + e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ExecutionException e) {
+			//Log.d("plm", "ExecutionEXCEPTION" + e);
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 ////////////////////////////////////////////////////////////
 	
 	public void removePlayerFromHighscores(Player player){
@@ -150,7 +281,7 @@ public class Repository {
 
 	
 	public void addPlayerToHighScores(String text,int value){
-		Player newPlayer = new Player(text, value);
+		/*Player newPlayer = new Player(text, value);
 		if (mHighScoresVector.size() >= 6){
 			Player lastPlayer = mHighScoresVector.lastElement();
 			if (lastPlayer.get_score() <= newPlayer.get_score()){
@@ -160,7 +291,10 @@ public class Repository {
 		} else {
 			mHighScoresVector.add(newPlayer);
 		}
-		sortVector();
+		sortVector();*/
+		AddHighScoresThread addThread = new AddHighScoresThread();
+		addThread.execute(text, Integer.toString(value));
+		//Log.d("plm", "addeds");
 		
 	}
 	
@@ -279,5 +413,11 @@ public class Repository {
 	}
 
 ////////////////////////////////////////////////////////////
+	
+	public boolean is_marked(String text) {
+		Word word = new Word(text);
+		return mWordsVector.contains(word);
+	}
+	
 	
 }

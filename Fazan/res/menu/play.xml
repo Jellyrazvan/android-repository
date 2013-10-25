@@ -1,4 +1,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
-
+	<item android:id="@+id/bulb"
+		android:icon="@drawable/bulb"
+		android:title="@string/suggestion"
+		android:showAsAction="always|withText" />
+	    
+    <item android:id="@+id/definition_button"
+        android:icon="@drawable/question_mark2"
+        android:title="@string/definition"
+        android:showAsAction="always|withText"/>
 
 </menu>

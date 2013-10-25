@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
@@ -29,6 +31,7 @@ public class HighscoreActivity extends SherlockActivity {
 	private Repository mRepository;
 	private ListView mHighScoresListView;
 	private TextView mHighScoresTextView;
+	private MediaPlayer mMediaPlayer;
 	
 /////////////////////////////////////////////////////////////////////////
 	
@@ -40,19 +43,21 @@ public class HighscoreActivity extends SherlockActivity {
 		
 		mRepository = Repository.getRepository(getApplicationContext());
 		mHighScoresListView = (ListView) findViewById(R.id.highscores_listView);
+		mMediaPlayer = MediaPlayer.create(this,R.raw.click);
 		
 		ActionBar bar = getSupportActionBar();
 		bar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.red)));
 		// Show the Up button in the action bar.
 		//setupActionBar();
 		bar.setDisplayHomeAsUpEnabled(true);
-		
+		/*
 		try {
 			this.mRepository.readHighscoresFromFile();
 		} catch (IOException e1) {
 			//Log.d("MyLogs", "plm");
 			e1.printStackTrace();
 		}
+		*/
 		
 		boolean isPlayerAdded = false;
 		if (savedInstanceState != null)
@@ -67,26 +72,46 @@ public class HighscoreActivity extends SherlockActivity {
 			
 			mRepository.addPlayerToHighScores(name, value);
 			
-			try {
-				this.mRepository.writeHighscoresToFile();
+			/*try {
+				//this.mRepository.writeHighscoresToFile();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}*/
+		}
+		
+		if (savedInstanceState == null) {
+			mRepository.loadHighScoresFromServer(this);
 		}
 		
 		Vector<Player> playersVector = mRepository.getVectorHighScores();
-		ArrayList<String> entrysList= new ArrayList<String>();
-		for (Player player: playersVector){
-			entrysList.add(player.get_name() + "           " + player.get_score());
-		}
-		
-		ArrayAdapter<String> arrayAdapter =
-					new ArrayAdapter<String>(this, R.layout.list_layout, entrysList);
-		mHighScoresListView.setAdapter(arrayAdapter);
-		
 		mHighScoresTextView = (TextView) findViewById(R.id.highscores_textView);
 		Typeface cartonSlabFont = Typeface.createFromAsset(getAssets(), "fonts/Carton-Slab.otf"); 
 		mHighScoresTextView.setTypeface(cartonSlabFont);
+		if (playersVector == null) {
+			String text = "Conexiunea cu serverul nu s-a putut realiza!";
+			CustomDialog cd = new CustomDialog(this, text);
+			cd.show();
+			cd.setOnDismissListener(new DialogInterface.OnDismissListener() {
+				
+				@Override
+				public void onDismiss(DialogInterface dialog) {
+					NavUtils.navigateUpFromSameTask(HighscoreActivity.this);
+					
+				}
+			});
+			//NavUtils.navigateUpFromSameTask(this);
+		} else {
+			ArrayList<String> entrysList= new ArrayList<String>();
+			for (Player player: playersVector){
+				entrysList.add(player.getPosition() + ". " + 
+						player.get_name() + "           " + player.get_score());
+			}
+			
+			ArrayAdapter<String> arrayAdapter =
+						new ArrayAdapter<String>(this, R.layout.list_layout, entrysList);
+			mHighScoresListView.setAdapter(arrayAdapter);
+			
+		}
 	}
 	
 	@Override
@@ -128,13 +153,27 @@ public class HighscoreActivity extends SherlockActivity {
 			//
 			// http://developer.android.com/design/patterns/navigation.html#up-vs-back
 			if (this.mRepository.get_sunet()){
-				final MediaPlayer mp = MediaPlayer.create(this,R.raw.click);
-				mp.start();
+				mMediaPlayer.start();
 			}
 			NavUtils.navigateUpFromSameTask(this);
 			return true;
 		}
 		return super.onOptionsItemSelected(item);
+	}
+	
+//////////////////////////////////////////////////////////////////////////
+	
+	public void onStop(){
+		super.onStop();
+		mMediaPlayer.release();
+		mMediaPlayer = null;
+	}
+	
+//////////////////////////////////////////////////////////////////////////
+	
+	public void onResume() {
+		super.onResume();
+		mMediaPlayer = MediaPlayer.create(this,R.raw.click);
 	}
 	
 /////////////////////////////////////////////////////////////////////////

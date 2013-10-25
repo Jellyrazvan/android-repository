@@ -918,18 +918,23 @@ containing a value of this type.
         public static final int abs__textfield_searchview_right_holo_dark=0x7f02006d;
         public static final int abs__textfield_searchview_right_holo_light=0x7f02006e;
         public static final int abs__toast_frame=0x7f02006f;
-        public static final int bullets=0x7f020070;
-        public static final int circle=0x7f020071;
-        public static final int circle_shape=0x7f020072;
-        public static final int exit=0x7f020073;
-        public static final int game=0x7f020074;
-        public static final int ic_bird=0x7f020075;
-        public static final int list=0x7f020076;
-        public static final int ok=0x7f020077;
-        public static final int rounded_corners=0x7f020078;
-        public static final int rounded_corners_toggle_button=0x7f020079;
-        public static final int rounded_corners_wrong=0x7f02007a;
-        public static final int settings=0x7f02007b;
+        public static final int bulb=0x7f020070;
+        public static final int bullets=0x7f020071;
+        public static final int circle=0x7f020072;
+        public static final int circle_dialog=0x7f020073;
+        public static final int circle_shape=0x7f020074;
+        public static final int exit=0x7f020075;
+        public static final int facebook=0x7f020076;
+        public static final int game=0x7f020077;
+        public static final int ic_bird=0x7f020078;
+        public static final int list=0x7f020079;
+        public static final int ok=0x7f02007a;
+        public static final int question_mark=0x7f02007b;
+        public static final int question_mark2=0x7f02007c;
+        public static final int rounded_corners=0x7f02007d;
+        public static final int rounded_corners_toggle_button=0x7f02007e;
+        public static final int rounded_corners_wrong=0x7f02007f;
+        public static final int settings=0x7f020080;
     }
     public static final class id {
         public static final int abs__action_bar=0x7f050020;
@@ -972,10 +977,15 @@ containing a value of this type.
         public static final int abs__title=0x7f05001b;
         public static final int abs__up=0x7f05000b;
         public static final int background_score=0x7f050043;
+        public static final int btn_ok=0x7f05004a;
+        public static final int bulb=0x7f05004f;
+        public static final int cancel_button=0x7f05004d;
+        public static final int definition_button=0x7f050050;
         public static final int diacritice_textView=0x7f050041;
         public static final int diacritice_toggleButton=0x7f050042;
         public static final int disableHome=0x7f050009;
         public static final int edit_query=0x7f050026;
+        public static final int facebook=0x7f05004e;
         public static final int given_word_textView=0x7f050045;
         public static final int highscores_button=0x7f050036;
         public static final int highscores_listView=0x7f050033;
@@ -991,6 +1001,7 @@ containing a value of this type.
         public static final int play_button=0x7f050035;
         public static final int quit_button=0x7f050038;
         public static final int score_textView=0x7f05003c;
+        public static final int send_button=0x7f05004c;
         public static final int settings_button=0x7f050037;
         public static final int settings_textView=0x7f05003d;
         public static final int showCustom=0x7f050008;
@@ -999,7 +1010,9 @@ containing a value of this type.
         public static final int sound_textView=0x7f05003f;
         public static final int sound_toggleButton=0x7f050040;
         public static final int submit_button=0x7f050047;
+        public static final int suggestion_edit_text=0x7f05004b;
         public static final int tabMode=0x7f050003;
+        public static final int txt_dialog=0x7f050049;
         public static final int useLogo=0x7f050004;
         public static final int welcome_textView=0x7f050034;
         public static final int word_editText=0x7f050046;
@@ -1036,9 +1049,11 @@ containing a value of this type.
         public static final int activity_name=0x7f030017;
         public static final int activity_option=0x7f030018;
         public static final int activity_play=0x7f030019;
-        public static final int list_layout=0x7f03001a;
-        public static final int sherlock_spinner_dropdown_item=0x7f03001b;
-        public static final int sherlock_spinner_item=0x7f03001c;
+        public static final int dialog_custom=0x7f03001a;
+        public static final int dialog_suggestion=0x7f03001b;
+        public static final int list_layout=0x7f03001c;
+        public static final int sherlock_spinner_dropdown_item=0x7f03001d;
+        public static final int sherlock_spinner_item=0x7f03001e;
     }
     public static final class menu {
         public static final int highscore=0x7f0c0000;
@@ -1094,14 +1109,20 @@ containing a value of this type.
         public static final int abs__shareactionprovider_share_with_application=0x7f0a0007;
         public static final int action_settings=0x7f0a000e;
         public static final int app_name=0x7f0a000d;
+        public static final int cancel=0x7f0a0022;
+        public static final int definition=0x7f0a001d;
         public static final int diacritice=0x7f0a001b;
         public static final int enter_your_name=0x7f0a0018;
+        public static final int facebook=0x7f0a001e;
         public static final int hello_world=0x7f0a000f;
         public static final int high_scores=0x7f0a0013;
         public static final int play=0x7f0a0011;
         public static final int quit=0x7f0a0012;
+        public static final int send=0x7f0a0021;
         public static final int settings=0x7f0a0014;
         public static final int submit=0x7f0a0016;
+        public static final int suggestion=0x7f0a001f;
+        public static final int suggestion_text_view=0x7f0a0020;
         public static final int sunete=0x7f0a001c;
         public static final int title_activity_highscore=0x7f0a0019;
         public static final int title_activity_name=0x7f0a0017;
